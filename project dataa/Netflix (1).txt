@@ -1,0 +1,181 @@
+///////////////////////////////////////////////////CREATING DATABASES////////////////////////////////////////////////////////////////////
+Create database Netflix;
+
+//////////////////////////////////////connecting databases///////////////////////////////////////////////////
+\c Netflix;
+
+
+
+
+//////////////////Customer TABLE ///////////////////////////////////////////\
+Create table Customer(Customer_Id varchar(6) PRIMARY KEY,Email varchar(30),FirstName varchar(15) not null,LastName varchar(15),PhoneNumber varchar(30));
+Insert into Customer(Customer_Id,Email,FirstName,LastName,PhoneNumber)values('C101','tedarchitect@gmail.com','Ted','Mosbey','9934482349');
+Insert into Customer(Customer_Id,Email,FirstName,LastName,PhoneNumber)values('C102','goat10@gmail.com','Lionel','Messi','7436482733');
+Insert into Customer(Customer_Id,Email,FirstName,LastName,PhoneNumber)values('C103','spidey3000@gmail.com','Tom','Holland','8523482349');
+Insert into Customer(Customer_Id,Email,FirstName,LastName,PhoneNumber)values('C104','jb3000@gmail.com','Jenish','Patel','7473482349');
+Insert into Customer(Customer_Id,Email,FirstName,LastName,PhoneNumber)values('C105','iloveharry@gmail.com','Emma','Watson','9673482349');
+Insert into Customer(Customer_Id,Email,FirstName,LastName,PhoneNumber)values('C106','Heisenburg7@gmail.com','Walter','White','9896554339');
+Insert into Customer(Customer_Id,Email,FirstName,LastName,PhoneNumber)values('C107','Lupin777@gmail.com','Lupin','Arsene','9673094567');
+
+
+
+
+
+
+
+///////////////////////////////////////////////Payment TABLE//////////////////////////////////////////////////////////
+Create table Payment(Payment_Id varchar(6) PRIMARY KEY,Payment_Method varchar(15) not null,Payment_Date Date not null,DueDate Date not null,AmountPaid int not null, Customer_Id varchar(6) not null);
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P101','UPI','01-01-2022','01-02-2022','499','C101');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P102','card','05-03-2022'.'05-04-2022','649','C102');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P103','BT','13-02-2022','13-03-2022','649','C103');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P104','UPI','10-01-2022','10-02-2022','149','C104');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P105','card','12-04-2022','12-05-2022','199','C105');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P106','UPI','25-04-2022','25-05-2022','649','C106');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P107','card','18-06-2022','16-06-2022','199','C107');
+
+
+
+
+
+
+/////////////////////////////////////Subscription TABLE ///////////////////////////////////////////////////////////////////
+
+Create table Subscription(Sub_Id varchar(6) PRIMARY KEY,Sub_Date date not null,Sub_Type varchar(10) not null,Price int not null,Payment_Id varchar(6) not null,Customer_Id varchar(6) not null,FOREIGN KEY(Payment_Id) References Payment(Payment_Id),FOREIGN KEY(Customer_Id) References Customer(Customer_Id));
+Insert into Subscription(Sub_Id,Sub_Date,Sub_Type,Price,Payment_Id,Customer_Id)values('S101','01-02-2022','gold','499','P101','C102');
+Insert into Subscription(Sub_Id,Sub_Date,Sub_Type,Price,Payment_Id,Customer_Id)values('S102','23-04-2022','platinum','649','P103','C104');
+Insert into Subscription(Sub_Id,Sub_Date,Sub_Type,Price,Payment_Id,Customer_Id)values('S103','11-02-2022','gold','499','P104','C103');
+Insert into Subscription(Sub_Id,Sub_Date,Sub_Type,Price,Payment_Id,Customer_Id)values('S104','13-03-2021','silver','199','P102','C101');
+Insert into Subscription(Sub_Id,Sub_Date,Sub_Type,Price,Payment_Id,Customer_Id)values('S105','18-05-2021','gold','499','P105','C105');
+
+
+
+
+
+
+
+
+/////////////////////////////////////////Account TABLE ///////////////////////////////////////////
+Create table Account(Email varchar(6) PRIMARY KEY,Password varchar(20),PhoneNumber int,Customer_Id varchar(15) not null,FOREIGN KEY(Customer_Id) References Customer(Customer_Id));
+Insert into Account(Email,Password,PhoneNumber,Customer_Id)values('tedarchitect@gmail.com','Qwerty3000','9934482349','C101');
+Insert into Account(Email,Password,PhoneNumber,Customer_Id)values('goat10@gmail.com','greatestofalltime','7436482733','C102');
+Insert into Account(Email,Password,PhoneNumber,Customer_Id)values('spidey3000@gmail.com','IronmanisMyoriginalDad','8523482349','C103');
+Insert into Account(Email,Password,PhoneNumber,Customer_Id)values('jb3000@gmail.com','Jenish3000','7473482349','C104');
+Insert into Account(Email,Password,PhoneNumber,Customer_Id)values('iloveharry@gmail.com','ronnisdumbAs','9673482349','C105');
+
+
+
+
+//////////////////////////////////////////////Profile TABLE ///////////////////////////////////////////
+
+Create table Profile(Profile_Id varchar(6) PRIMARY KEY,Maturity_Rating varchar(4),Email varchar(30) not null,FOREIGN KEY(Email) References Account(Email));
+Insert into Profile(Profile_Id,Maturity_Rating,Email)values('Pr101','18+','tedarchitect@gmail.com');
+Insert into Profile(Profile_Id,Maturity_Rating,Email)values('Pr102','18+','goat10@gmail.com');
+Insert into Profile(Profile_Id,Maturity_Rating,Email)values('Pr103','12+','spidey3000@gmail.com');
+Insert into Profile(Profile_Id,Maturity_Rating,Email)values('Pr104','16+','jb3000@gmail.com');
+Insert into Profile(Profile_Id,Maturity_Rating,Email)values('Pr105','18+','iloveharry@gmail.com');
+Insert into Profile(Profile_Id,Maturity_Rating,Email)values('Pr106','12+','xyz2000@gmail.com');
+Insert into Profile(Profile_Id,Maturity_Rating,Email)values('Pr107','9+','roniptl34@gmail.com');
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////LikedContent TABLE ///////////////////////////////////////////
+
+Create table LikedContent(Content_name varchar(40) PRIMARY KEY,Movies_Type varchar(35),Profile_Id varchar(6) not null,FOREIGN KEY(Profile_Id) References Profile(Profile_Id));
+Insert into LikedContent(Content_name,Movies_Type,Profile_Id)values('Lost In Space','Si-Fi','Pr105');
+Insert into LikedContent(Content_name,Movies_Type,Profile_Id)values('Stranger Things','Fantasy-Drama','Pr101');
+Insert into LikedContent(Content_name,Movies_Type,Profile_Id)values('Breaking Bad','Drama','Pr103');
+Insert into LikedContent(Content_name,Movies_Type,Profile_Id)values('Elite','Teen-Murder-Drama','Pr104');
+Insert into LikedContent(Content_name,Movies_Type,Profile_Id)values('Big Bang Thoery','Comedy','Pr102');
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////Content TABLE ////////////////////////////////////////////////////////
+
+Create table Content(Content_Id varchar(6) PRIMARY KEY,Sub_Id varchar(6) not null,Email varchar(20) not null,FOREIGN KEY(Sub_Id) References Subscription(Sub_Id));
+Insert into Content(Content_Id,Sub_Id,Email)values('Con101','Sub101','tedarchitect@gmail.com');
+Insert into Content(Content_Id,Sub_Id,Email)values('Con105','Sub105','goat10@gmail.com');
+Insert into Content(Content_Id,Sub_Id,Email)values('Con102','Sub104','spidey3000@gmail.com');
+Insert into Content(Content_Id,Sub_Id,Email)values('Con103','Sub102','jb3000@gmail.com');
+Insert into Content(Content_Id,Sub_Id,Email)values('Con104','Sub103','iloveharry@gmail.com');
+
+
+
+
+/////////////////////////////////////////////Catagories TABLE ///////////////////////////////////////////////////////
+Create table Catagories(Catagory_Id varchar(6) PRIMARY KEY,Content_Id varchar(6) not null,Catagory_Name varchar(20),FOREIGN KEY(Content_Id) References Content(Content_Id));
+Insert into Catagories(Catagory_Id,Content_Id,Catagory_Name)values('Cat101','Con101','Si-Fi');
+Insert into Catagories(Catagory_Id,Content_Id,Catagory_Name)values('Cat102','Con105','Horror');
+Insert into Catagories(Catagory_Id,Content_Id,Catagory_Name)values('Cat103','Con103','Thriller');
+Insert into Catagories(Catagory_Id,Content_Id,Catagory_Name)values('Cat104','Con102','Fantasy');
+Insert into Catagories(Catagory_Id,Content_Id,Catagory_Name)values('Cat105','Con104','Romance');
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////Genre TABLE ////////////////////////////////////////////////////////
+
+
+Create table Genre(Genre_Id varchar(6) PRIMARY KEY,Content_Id varchar(6) not null,Genre_Name varchar(20) not null,FOREIGN KEY(Content_Id) References Content(Content_Id));
+
+Insert into Genre(Genre_Id,Content_Id,Genre_Name)values('Gen101','Con109','Horror');
+Insert into Genre(Genre_Id,Content_Id,Genre_Name)values('Gen102','Con102','Fantasy');
+Insert into Genre(Genre_Id,Content_Id,Genre_Name)values('Gen103','Con108','Drama');
+Insert into Genre(Genre_Id,Content_Id,Genre_Name)values('Gen104','Con107','Comedy');
+Insert into Genre(Genre_Id,Content_Id,Genre_Name)values('Gen105','Con106','Western');
+
+
+
+
+
+
+///////////////////////////////////////////////////////Movies TABLE ////////////////////////////////////////////////////
+
+ Create table Movies(Movies_Id varchar(6) PRIMARY KEY,Content_Id varchar(6) not null,Movies_Name varchar(20) not null,Movies_Type varchar(6) not null,ReleaseDate int,Rating varchar(5),FOREIGN KEY(Content_Id) References Content(Content_Id));
+Insert into Movies(Movies_Id,Content_Id,Movies_Name,Movies_Type,ReleaseDate,Rating)
+Insert into Movies(Movies_Id,Content_Id,Movies_Name,Movies_Type,ReleaseDate,Rating)values('M101','Con101','Avtar','Si-Fi','16-12-2009','9');
+Insert into Movies(Movies_Id,Content_Id,Movies_Name,Movies_Type,ReleaseDate,Rating)values('M104','Con102','The Gray Man','Action','03-06-2022','8.5');
+Insert into Movies(Movies_Id,Content_Id,Movies_Name,Movies_Type,ReleaseDate,Rating)values('M102','Con104','The lost City','Romance','11-12-2021','7.5');
+Insert into Movies(Movies_Id,Content_Id,Movies_Name,Movies_Type,ReleaseDate,Rating)values('M103','Con103','Jurassic World','Si-Fi','26-02-2018','8.5');
+Insert into Movies(Movies_Id,Content_Id,Movies_Name,Movies_Type,ReleaseDate,Rating)values('M105','Con106','Tenet','Action','13-12-2020','7.5');
+
+
+
+
+///////////////////////////////////////////////////////TvShow TABLE /////////////////////////////////////////////////
+Create table TvShow(TvShow_Id varchar(6) PRIMARY KEY,Content_Id varchar(6) not null,TvShow_Name varchar(20) not null,TvShow_Type varchar(6) not null,ReleaseDate int,NumberOfEpisodes int not null,Rating int,FOREIGN KEY(Content_Id) References Content(Content_Id));
+
+Insert into TvShow(TvShow_Id,Content_Id,TvShow_Name,TvShow_Type,ReleaseDate,NumberOfEpisodes,Rating)values('TS101','Con106','Lucifer','Mystery','01-02-2017','78','9');
+Insert into TvShow(TvShow_Id,Content_Id,TvShow_Name,TvShow_Type,ReleaseDate,NumberOfEpisodes,Rating)values('TS102','Con107','Friends','Comedy','1-02-2000','133','7.8');
+Insert into TvShow(TvShow_Id,Content_Id,TvShow_Name,TvShow_Type,ReleaseDate,NumberOfEpisodes,Rating)values('TS103','Con108','3%','Si-Fi','11-11-2019','42','8');
+Insert into TvShow(TvShow_Id,Content_Id,TvShow_Name,TvShow_Type,ReleaseDate,NumberOfEpisodes,Rating)values('TS104','Con109','Daredevil','Mystery-SuperHeros','11-12-2014','67','9.2');
+Insert into TvShow(TvShow_Id,Content_Id,TvShow_Name,TvShow_Type,ReleaseDate,NumberOfEpisodes,Rating)values('TS105','Con110','Stranger Things','Dark-Thriller','01-02-2016','46','8.5');
+
+
+
+
+
+
+
+

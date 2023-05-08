@@ -1,0 +1,147 @@
+///////////Payment TABLE///////////////////////////
+Create table Payment(Payment_Id varchar(6) PRIMARY KEY,Payment_Method varchar(15) not null,Payment_Date Date not null,DueDate Date not null,AmountPaid int not null, Customer_Id varchar(6) not null);
+
+
+
+
+//////////////////////////payment_history table//////////////////////////////////////
+Create table Payment_history(History_id varchar(6) PRIMARY KEY,Amount int not null,startDate date not nul,EndDate date not null,Payment_id varchar(6) not null,FOREIGN KEY(Payment_id) REFERENCES Payment(Payment_id);
+
+
+
+
+
+//////////////////Customer TABLE ///////////////////////////////////////////\
+Create table Customer(Customer_Id varchar(6) PRIMARY KEY,Email varchar(20),FirstName varchar(15) not null,LastName varchar(15),PhoneNumber int);
+
+
+
+
+
+
+
+/////////////////Subscription TABLE ///////////////////////////////////////////\
+
+Create table Subscription(Sub_Id varchar(6) PRIMARY KEY,Sub_Date date not null,Sub_Type varchar(10) not null,Price int not null,Payment_Id varchar(6) not null,Customer_Id varchar(6) not null,FOREIGN KEY(Payment_Id) References Payment(Payment_Id),FOREIGN KEY(Customer_Id) References Customer(Customer_Id));
+
+
+
+
+
+
+
+
+
+/////////////////Account TABLE ///////////////////////////////////////////\
+Create table Account(Email varchar(6) PRIMARY KEY,Password varchar(20),PhoneNumber int,Customer_Id varchar(15) not null,FOREIGN KEY(Customer_Id) References Customer(Customer_Id));
+
+
+
+
+
+
+
+
+/////////////////Profile TABLE ///////////////////////////////////////////\
+
+Create table Profile(Profile_Id varchar(6) PRIMARY KEY,Maturity_Rating varchar(4),Email varchar(20) not null,FOREIGN KEY(Email) References Account(Email));
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////LikedContent TABLE ///////////////////////////////////////////\
+
+Create table LikedContent(Content_name varchar(20) PRIMARY KEY,Moovies_Type varchar(15),Profile_Id varchar(6) not null,FOREIGN KEY(Profile_Id) References Profile(Profile_Id));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////Content TABLE ///////////////////////////////////////////\
+
+Create table Content(Content_Id varchar(6) PRIMARY KEY,Sub_Id varchar(6) not null,Email varchar(20) not null,FOREIGN KEY(Sub_Id) References Subscription(Sub_Id));
+
+
+
+
+
+
+
+
+
+
+////////////////Catagories TABLE ///////////////////////////////////////////\
+Create table Catagories(Catagory_Id varchar(6) PRIMARY KEY,Content_Id varchar(6) not null,Catagory_Name varchar(20) not null,FOREIGN KEY(Content_Id) References Content(Content_Id));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////Genre TABLE ///////////////////////////////////////////\
+
+
+Create table Genre(Genre_Id varchar(6) PRIMARY KEY,Content_Id varchar(6) not null,Genre_Name varchar(20) not null,FOREIGN KEY(Content_Id) References Content(Content_Id));
+
+
+
+
+
+
+
+
+
+
+/////////////////Movies TABLE ///////////////////////////////////////////\
+
+ Create table Movies(Movies_Id varchar(6) PRIMARY KEY,Content_Id varchar(6) not null,Movies_Name varchar(20) not null,Movies_Type varchar(6) not null,ReleaseDate int,Rating int,FOREIGN KEY(Content_Id) References Content(Content_Id));
+
+
+
+
+
+
+
+
+
+/////////////////TvShow TABLE ///////////////////////////////////////////\
+Create table TvShow(TvShow_Id varchar(6) PRIMARY KEY,Content_Id varchar(6) not null,TvShow_Name varchar(20) not null,TvShow_Type varchar(6) not null,ReleaseDate int,NumberOfEpisodes int not null,Rating int,FOREIGN KEY(Content_Id) References Content(Content_Id));
+
+
+
+
+
+
+
+
+
+

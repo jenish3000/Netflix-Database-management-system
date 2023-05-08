@@ -1,0 +1,10 @@
+///////////Payment TABLE///////////////////////////
+Create table Payment(Payment_Id varchar(6) PRIMARY KEY,Payment_Method varchar(15) not null,Payment_Date Date not null,DueDate Date not null,AmountPaid int not null, Customer_Id varchar(6) not null);
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P1001','online','01-01-2022','01-02-2022','2000','C103');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P1002','cash','01-03-2022','01-04-2022','2500','C104');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P1003','online','13-02-2022','14-03-2022','2100','C105');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P1004','online','10-01-2022','12-02-2022','1000','C106');
+Insert into Payment(Payment_Id,Payment_Method,Payment_Date,DueDate,AmountPaid,Customer_id)values('P1005','cash','12-04-2022','13-05-2022','15000','C107');
+
+
+

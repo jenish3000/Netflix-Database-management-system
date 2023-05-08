@@ -1,0 +1,9 @@
+/////////////////Subscription TABLE ///////////////////////////////////////////\
+
+Create table Subscription(Sub_Id varchar(6) PRIMARY KEY,Sub_Date date not null,Sub_Type varchar(10) not null,Price int not null,Payment_Id varchar(6) not null,Customer_Id varchar(6) not null,FOREIGN KEY(Payment_Id) References Payment(Payment_Id),FOREIGN KEY(Customer_Id) References Customer(Customer_Id));
+Insert into Subscription(Sub_Id,Sub_Date,Sub_Type,Price,Payment_Id,Customer_Id)
+values('S101','01-02-2022','gold','1000','P1001','C103')
+values('S103','23-04-2022','platinum','2000','P1003','C104')
+values('S108','11-02-2022','gold','1000','P1004','C106')
+values('S107','13-03-2021','silver','500','P1002','C105')
+values('S105','18-05-2021','gold','1000','P1005','C107');

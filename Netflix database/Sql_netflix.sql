@@ -1,0 +1,1 @@
+create  table Payment(PaymentId varchar(5),PaymentMethod varchar(20),PaymentDate date,AmountPaid int(3),CustomerId varchar(6));

@@ -1,0 +1,8 @@
+//////////////////Customer TABLE ///////////////////////////////////////////\
+Create table Customer(Customer_Id varchar(6) PRIMARY KEY,Email varchar(20),FirstName varchar(15) not null,LastName varchar(15),PhoneNumber int);
+Insert into Customer(Customer_Id,Email,FirstName,LastName,PhoneNumber)
+values('C103','om12@gmail.com','Om','Patel','5934482349')
+values('C105','jay23@gmail.com','Jay','Patel','7436482733')
+values('C107','xyz15@gmail.com','Keval','Shah','6523482349')
+values('C106','nik425@gmail.com','parth','prajapati','6473482349')
+values('C104','ewa124@gmail.com','Ewa','soni','9673482349');
